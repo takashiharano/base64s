@@ -1,0 +1,18 @@
+java/target/
+java/pom.xml.tag
+java/pom.xml.releaseBackup
+java/pom.xml.versionsBackup
+java/pom.xml.next
+java/release.properties
+java/dependency-reduced-pom.xml
+java/buildNumber.properties
+java/.mvn/timing.properties
+java/.mvn/wrapper/maven-wrapper.jar
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+vba/Base64S.xlsm
+vba/~$Base64S.xlsm
