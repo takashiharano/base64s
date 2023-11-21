@@ -36,7 +36,7 @@ Public Function Encode(src() As Byte, key As String) As String
     Dim kb() As Byte
     Dim srcLen As Integer
     Dim keyLen As Integer
-    Dim p As Integer
+    Dim d As Integer
     Dim buf() As Byte
     Dim i As Integer
     Dim j As Integer
@@ -45,25 +45,26 @@ Public Function Encode(src() As Byte, key As String) As String
     srcLen = UBound(src) + 1
     keyLen = UBound(kb) + 1
 
-    p = keyLen - srcLen
-    If p < 0 Then
-        p = 0
+    d = keyLen - srcLen
+    If d < 0 Then
+        d = 0
     End If
 
-    ReDim buf(srcLen + p)
-    buf(0) = p
+    ReDim buf(srcLen + d)
 
     For i = 0 To (srcLen - 1)
-        buf(i + 1) = src(i) Xor kb(i Mod keyLen)
+        buf(i) = src(i) Xor kb(i Mod keyLen)
     Next
 
     j = i
-    If p > 0 Then
-        For i = 0 To (p - 1)
-            buf(j + 1) = 255 Xor kb(j Mod keyLen)
+    If d > 0 Then
+        For i = 0 To (d - 1)
+            buf(j) = 255 Xor kb(j Mod keyLen)
             j = j + 1
         Next
     End If
+
+    buf(j) = d
 
     Encode = EncodeBase64(buf)
 End Function
@@ -108,7 +109,7 @@ Public Function Decode(b64 As String, key As String) As Byte()
     Dim srcLen As Integer
     Dim keyLen As Integer
     Dim bufLen As Integer
-    Dim p As Integer
+    Dim d As Integer
     Dim buf() As Byte
     Dim i As Integer
     Dim j As Integer
@@ -117,12 +118,12 @@ Public Function Decode(b64 As String, key As String) As Byte()
     srcLen = UBound(src) + 1
     keyLen = UBound(kb) + 1
 
-    p = src(0)
-    bufLen = srcLen - p
-    ReDim buf(bufLen - 2)
+    d = src(UBound(src))
+    bufLen = srcLen - d - 2
+    ReDim buf(bufLen)
 
     j = 0
-    For i = 1 To (bufLen - 1)
+    For i = 0 To bufLen
         buf(j) = src(i) Xor kb(j Mod keyLen)
         j = j + 1
     Next

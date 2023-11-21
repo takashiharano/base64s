@@ -15,7 +15,8 @@ function Test-Decoding {
         $Key
     )
     $s = Get-Base64sDecodedString $B64 $Key
-    Write-Host $s
+    $res = "`"" + $s + "`""
+    Write-Host $res
 }
 
 Write-Host "-------------------------------"
@@ -34,16 +35,20 @@ Write-Host "-------------------------------"
 Write-Host "Decode"
 Write-Host "-------------------------------"
 Test-Decoding "YWJj" ""
-Test-Decoding "ABkaGw==" "x"
-Test-Decoding "ABkbGQ==" "xyz"
-Test-Decoding "ARkbGc4=" "xyz1"
-Test-Decoding "/iDNzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczL3A==" "A2345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234#"
-Test-Decoding "AJv5+pv5/Jv5/g==" "x"
-Test-Decoding "AJv4+Jv4/pv4/A==" "xyz"
-Test-Decoding "AZv4+NKzt9e0sJ4=" "xyz123456a"
+Test-Decoding "GRobAA==" "x"
+Test-Decoding "GRsZAA==" "xyz"
+Test-Decoding "GRsZzgE=" "xyz1"
+Test-Decoding "IM3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvc/g==" "A2345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234#"
+Test-Decoding "m/n6m/n8m/n+AA==" "x"
+Test-Decoding "m/j4m/j+m/j8AA==" "xyz"
+Test-Decoding "m/j40rO317SwngE=" "xyz123456a"
+
+
+Write-Host "Incorrect:"
+Test-Decoding "XX==" "x"
 
 Write-Host "w/ Wrong key:"
-Test-Decoding "ABkbGQ==" "123"
+Test-Decoding "GRsZAA==" "123"
 
 Write-Host "-------------------------------"
 [byte[]]$b = Get-Content "C:\test\img.jpg" -Encoding Byte

@@ -10,25 +10,25 @@ The detail of the mechanism is available at https://b64s.com/
 Java:
 ```Java
 String encoded = Base64s.encode("abc", "xyz");
-String decoded = Base64s.decodeString("ABkbGQ==", "xyz");
+String decoded = Base64s.decodeString("GRsZAA==", "xyz");
 ```
 
 JavaScript:
 ```JavaSctipt
 var encoded = base64s.encode('abc', 'xyz');
-var decoded = base64s.decode('ABkbGQ==', 'xyz');
+var decoded = base64s.decode('GRsZAA==', 'xyz');
 ```
 
 Python:
 ```Python
 encoded = base64s.encode_string('abc', 'xyz')
-decoded = base64s.decode_string('ABkbGQ==', 'xyz')
+decoded = base64s.decode_string('GRsZAA==', 'xyz')
 ```
 
 PowerShell:
 ```powershell
 $encoded = Get-Base64sEncodedString "abc" "xyz"
-$decoded = Get-Base64sDecodedString "ABkbGQ==" "xyz"
+$decoded = Get-Base64sDecodedString "GRsZAA==" "xyz"
 ```
 
 Visual Basic:
@@ -36,7 +36,7 @@ Visual Basic:
 Dim encoded As String
 Dim decoded As String
 encoded = Base64s.EncodeString("abc", "xyz")
-decoded = Base64s.DecodeString("ABkbGQ==", "xyz")
+decoded = Base64s.DecodeString("GRsZAA==", "xyz")
 ```
 
 ## Notice

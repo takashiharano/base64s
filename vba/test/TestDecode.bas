@@ -1,40 +1,30 @@
 Option Explicit
 
-Public Sub EncodeTest()
-    Call DoTest("YWJj", 0, "abc")
-    Call DoTest("YGNi", 1, "abc")
-    Call DoTest("Y2Bh", 2, "abc")
-    Call DoTest("n5yd", 254, "abc")
-    Call DoTest("np2c", 255, "abc")
-    Call DoTest("YWJj", 256, "abc")
-    Call DoTest("YGNi", 257, "abc")
-    Call DoTest("n5yd", 510, "abc")
-    Call DoTest("np2c", 511, "abc")
-    Call DoTest("YWJj", 512, "abc")
-    Call DoTest("YGNi", 513, "abc")
-
-    Call DoTest("44GC44GE44GG", 0, "あいう")
-    Call DoTest("4oCD4oCF4oCH", 1, "あいう")
-    Call DoTest("4YOA4YOG4YOE", 2, "あいう")
-    Call DoTest("HX98HX96HX94", 254, "あいう")
-    Call DoTest("HH59HH57HH55", 255, "あいう")
-    Call DoTest("44GC44GE44GG", 256, "あいう")
-    Call DoTest("4oCD4oCF4oCH", 257, "あいう")
-    Call DoTest("HX98HX96HX94", 510, "あいう")
-    Call DoTest("HH59HH57HH55", 511, "あいう")
-    Call DoTest("44GC44GE44GG", 512, "あいう")
-    Call DoTest("4oCD4oCF4oCH", 513, "あいう")
+Public Sub DecodeTest()
+    Debug.Print "Decode Test"
+    Call DoTest("", "", "")
+    Call DoTest("", "x", "")
+    Call DoTest("abc", "", "YWJj")
+    Call DoTest("abc", "x", "GRobAA==")
+    Call DoTest("abc", "xyz", "GRsZAA==")
+    Call DoTest("abc", "xyz1", "GRsZzgE=")
+    Call DoTest("a", "A2345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234#", "IM3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvKycjHxs/OzczLysnIx8bPzs3My8rJyMfGz87NzMvc/g==")
+    Call DoTest("あいう", "", "44GC44GE44GG")
+    Call DoTest("あいう", "x", "m/n6m/n8m/n+AA==")
+    Call DoTest("あいう", "xyz", "m/j4m/j+m/j8AA==")
+    Call DoTest("あいう", "xyz123456a", "m/j40rO317SwngE=")
+    Debug.Print ""
 End Sub
 
-Private Sub DoTest(s As String, k As Integer, exp As String)
+Private Sub DoTest(exp As String, key As String, b64 As String)
     Dim r As String
-    r = Base64s.DecodeString(s, k)
+    r = Base64s.DecodeString(b64, key)
     Dim res As String
     Dim status As String
     status = "NG"
     If r = exp Then
         status = "OK"
     End If
-    res = "[" & status & "] " & s & " -> " & r
+    res = "[" & status & "] """ & b64 & """ -> """ & r & """"
     Debug.Print res
 End Sub

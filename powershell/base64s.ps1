@@ -91,6 +91,9 @@ function Get-Base64sDecodedString {
     )
 
     $buf = Get-Base64sDecodedBytes $Src $Key
+    if ($buf -eq $null) {
+        return ""
+    }
     $str = [System.Text.Encoding]::UTF8.GetString($buf)
     return $str
 }
@@ -106,23 +109,24 @@ function Get-EncdedBytes {
         return $Src
     }
 
-    $p = $Key.Length - $Src.Length
-    if ($p -lt 0) {
-        $p = 0
+    $d = $Key.Length - $Src.Length
+    if ($d -lt 0) {
+        $d = 0
     }
 
-    $buf = New-Object byte[] ($Src.Length + $p + 1)
+    $buf = New-Object byte[] ($Src.Length + $d + 1)
 
-    $buf[0] = $p
     for ($i=0; $i -lt $Src.Length; $i++) {
-        $buf[$i + 1] = $Src[$i] -bxor $Key[$i % $Key.Length]
+        $buf[$i] = $Src[$i] -bxor $Key[$i % $Key.Length]
     }
 
     $j = $i
-    for ($i=0; $i -lt $p; $i++) {
-        $buf[$j + 1] = (255 -bxor $Key[$j % $Key.Length])
+    for ($i=0; $i -lt $d; $i++) {
+        $buf[$j] = (255 -bxor $Key[$j % $Key.Length])
         $j++
     }
+
+    $buf[$j] = $d
 
     return $buf
 }
@@ -138,12 +142,15 @@ function Get-DecdedBytes {
         return $Src
     }
 
-    $p = $Src[0]
-    $len = $Src.Length - $p
-    $buf = New-Object byte[] ($len - 1)
+    $d = $Src[$Src.Length - 1]
+    $len = $Src.Length - $d - 1
+    if ($len -lt 0) {
+        $len = 0
+    }
+    $buf = New-Object byte[] ($len)
 
     $j = 0
-    for ($i=1; $i -lt $len; $i++) {
+    for ($i=0; $i -lt $len; $i++) {
         $buf[$j] = $Src[$i] -bxor $Key[$j % $Key.Length]
         $j++;
     }
