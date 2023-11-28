@@ -7,9 +7,12 @@ import base64s
 def test(exp, k, b64):
     s = base64s.decode(b64, k)
     st = 'OK' if s == exp else 'NG'
-    print('[' + st + '] exp=' + exp + ' got=' + s)
+    print('[' + st + '] exp=' + str(exp) + ' got=' + str(s))
 
 def main():
+    test(None, None, None)
+    test('', None, '')
+    test('abc', None, 'YWJj')
     test('', '', '')
     test('', 'x', '')
     test('abc', '', 'YWJj')

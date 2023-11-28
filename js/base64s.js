@@ -9,6 +9,7 @@ var base64s = {
    * Plain text / Byte array to Base64s encoded string
    */
   encode: function(s, k) {
+    if (s == null) return null;
     var a = ((typeof s == 'string') ? base64s.UTF8.toByteArray(s) : s);
     var x = base64s.UTF8.toByteArray(k);
     var b = base64s._encode(a, x);
@@ -37,6 +38,7 @@ var base64s = {
    * Base64s encoded string to Byte array / Plain text
    */
   decode: function(s, k, byB) {
+    if (s == null) return null;
     var b = base64s.Base64.decode(s);
     var x = base64s.UTF8.toByteArray(k);
     var a = base64s._decode(b, x);

@@ -9,8 +9,12 @@ import base64
 DEFAULT_ENCODING = 'utf-8'
 
 #------------------------------------------------------------------------------
-def encode(s, k, encoding=DEFAULT_ENCODING):
+def encode(s, k='', encoding=DEFAULT_ENCODING):
+    if s is None:
+        return None
     a = s
+    if k is None:
+        k = ''
     if type(s).__name__ == 'str':
         a = s.encode(encoding)
     kb = k.encode(DEFAULT_ENCODING)
@@ -42,7 +46,11 @@ def _encode(a, k):
     return bytearray(b)
 
 #------------------------------------------------------------------------------
-def decode(b64, k, bin=False, encoding=DEFAULT_ENCODING):
+def decode(b64, k='', bin=False, encoding=DEFAULT_ENCODING):
+    if b64 is None:
+        return None
+    if k is None:
+        k = ''
     b = base64.b64decode(b64)
     kb = k.encode(DEFAULT_ENCODING)
     d = _decode(b, kb)

@@ -16,3 +16,7 @@ __pycache__/
 
 vba/Base64S.xlsm
 vba/~$Base64S.xlsm
+js/_linter.txt
+js/.eslintrc.json
+js/_ESLint.bat
+js/_linter.bat
