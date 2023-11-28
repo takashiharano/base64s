@@ -12,9 +12,9 @@ DEFAULT_ENCODING = 'utf-8'
 def encode(s, k='', encoding=DEFAULT_ENCODING):
     if s is None:
         return None
-    a = s
     if k is None:
         k = ''
+    a = s
     if type(s).__name__ == 'str':
         a = s.encode(encoding)
     kb = k.encode(DEFAULT_ENCODING)
