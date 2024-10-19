@@ -1,12 +1,12 @@
 /*!
- * Base64s
+ * Base64S
  * Copyright 2023 Takashi Harano
  * Released under the MIT license
  * https://b64s.com/
  */
 var base64s = {
   /**
-   * Plain text / Byte array to Base64s encoded string
+   * Plain text / Byte array to Base64S encoded string
    */
   encode: function(s, k) {
     if (s == null) return null;
@@ -35,7 +35,7 @@ var base64s = {
   },
 
   /**
-   * Base64s encoded string to Byte array / Plain text
+   * Base64S encoded string to Byte array / Plain text
    */
   decode: function(s, k, byB) {
     if (s == null) return null;
